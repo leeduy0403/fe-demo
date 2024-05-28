@@ -8,6 +8,7 @@ import
 
 function Home() {
 
+    // Should have an API to fetch data
     const data = [
         {
           name: 'Page A',
@@ -70,21 +71,21 @@ function Home() {
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>CATEGORIES</h3>
+                    <h3>LUMINOSITY</h3>
                     <BsFillGrid3X3GapFill className='card_icon'/>
                 </div>
                 <h1>12</h1>
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>CUSTOMERS</h3>
+                    <h3>MOISTURE</h3>
                     <BsPeopleFill className='card_icon'/>
                 </div>
                 <h1>33</h1>
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>ALERTS</h3>
+                    <h3>TEMPERATURE</h3>
                     <BsFillBellFill className='card_icon'/>
                 </div>
                 <h1>42</h1>

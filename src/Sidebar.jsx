@@ -22,17 +22,17 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
             </li>
             <li className='sidebar-list-item'>
                 <a href="">
-                    <BsFillArchiveFill className='icon'/> Products
+                    <BsFillArchiveFill className='icon'/> Temperature
                 </a>
             </li>
             <li className='sidebar-list-item'>
                 <a href="">
-                    <BsFillGrid3X3GapFill className='icon'/> Categories
+                    <BsFillGrid3X3GapFill className='icon'/> Moisture
                 </a>
             </li>
             <li className='sidebar-list-item'>
-                <a href="">
-                    <BsPeopleFill className='icon'/> Customers
+                <a href="">s
+                    <BsPeopleFill className='icon'/> Luminosity
                 </a>
             </li>
             <li className='sidebar-list-item'>
