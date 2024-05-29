@@ -1,4 +1,7 @@
+//import {useRef} from "react";
+//import Webcam from 'react-webcam'
 import React from 'react'
+import Camera from './Camera'
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
  from 'react-icons/bs'
@@ -138,6 +141,8 @@ function Home() {
             </ResponsiveContainer>
 
         </div>
+        <div><Camera /></div>
+        
     </main>
   )
 }

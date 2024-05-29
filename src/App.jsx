@@ -3,6 +3,7 @@ import './App.css'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Home from './Home'
+//import Camera from './Camera'
 
 function App() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
