@@ -135,7 +135,7 @@ body {
   margin: 15px 0;
 }
 
-.card {
+.card, .card-slider {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -158,16 +158,45 @@ body {
 .card:nth-child(4) {
   background-color: #d50000;
 }
+
+
 .slider {
   width: 300px;
 }
-.card:nth-child(5) {
+
+.card-slider, .card-light {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.card-slider:first-child {
   background-color: darkolivegreen;
-  width: 400px;
+  /* width: 400px; */
 
 }
 
-.card-inner {
+.card-light:first-child {
+  background-color: rgb(225, 16, 145);
+  /* width: 400px; */
+
+}
+
+.card-inner-light button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #000;
+  color: white;
+}
+
+.card-inner, .card-inner-slider, .card-inner-light {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -229,13 +258,13 @@ button:hover {
 /* Small <= 768px */
   
 @media screen and (max-width: 768px) {
-  .main-cards {
+  .main-cards, .card-slider {
     grid-template-columns: 1fr;
     gap: 10px;
     margin-bottom: 0;
   }
 
-  .charts {
+  .charts, .camera {
     grid-template-columns: 1fr;
     margin-top: 30px;
   }
@@ -244,7 +273,7 @@ button:hover {
 /* Extra Small <= 576px */
 
 @media screen and (max-width: 576px) {
-  .hedaer-left {
+  .header-left {
     display: none;
   }
 }

@@ -3,7 +3,8 @@
 import React from 'react'
 import Camera from './Camera'
 import Slider from './Slider';
-import Button_Cam from './Button_Cam'
+import Button_Cam from './Button_Cam';
+import Light from './Light';
 
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill, BsSliders}
@@ -97,10 +98,13 @@ function Home() {
                 </div>
                 <h1>42</h1>
             </div>
-
-            <Slider />
+            
           
         </div>
+
+        <div><Slider /></div>
+
+        <div><Light /></div>
 
 
         <div className='charts'>
@@ -150,7 +154,7 @@ function Home() {
 
         </div>
     
-        <div><Button_Cam /></div>
+        <div className='camera' ><Button_Cam /></div>
         
     </main>
   )

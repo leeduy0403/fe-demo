@@ -8,8 +8,8 @@ export default function Slider() {
     };
 
     return (
-        <div className='card'>
-            <div className='card-inner'>
+        <div className='card-slider'>
+            <div className='card-inner-slider'>
                 <h3>FAN SPEED</h3>
                 
                 <input 
