@@ -31,7 +31,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </a>
             </li>
             <li className='sidebar-list-item'>
-                <a href="">s
+                <a href="">
                     <BsPeopleFill className='icon'/> Luminosity
                 </a>
             </li>

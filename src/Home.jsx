@@ -3,6 +3,8 @@
 import React from 'react'
 import Camera from './Camera'
 import Slider from './Slider';
+import Button_Cam from './Button_Cam'
+
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill, BsSliders}
  from 'react-icons/bs'
@@ -147,7 +149,8 @@ function Home() {
             </ResponsiveContainer>
 
         </div>
-        <div><Camera /></div>
+    
+        <div><Button_Cam /></div>
         
     </main>
   )
