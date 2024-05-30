@@ -2,6 +2,8 @@
 //import Webcam from 'react-webcam'
 import React from 'react'
 import Camera from './Camera'
+import Button_Cam from './Button_Cam'
+
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
  from 'react-icons/bs'
@@ -141,7 +143,8 @@ function Home() {
             </ResponsiveContainer>
 
         </div>
-        <div><Camera /></div>
+    
+        <div><Button_Cam /></div>
         
     </main>
   )
