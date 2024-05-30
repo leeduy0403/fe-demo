@@ -2,12 +2,14 @@
 //import Webcam from 'react-webcam'
 import React from 'react'
 import Camera from './Camera'
+import Slider from './Slider';
 import 
-{ BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
+{ BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill, BsSliders}
  from 'react-icons/bs'
  import 
  { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
  from 'recharts';
+// import Slider from './Slider';
 
 function Home() {
 
@@ -93,7 +95,11 @@ function Home() {
                 </div>
                 <h1>42</h1>
             </div>
+
+            <Slider />
+          
         </div>
+
 
         <div className='charts'>
             <ResponsiveContainer width="100%" height="100%">

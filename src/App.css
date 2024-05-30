@@ -158,6 +158,14 @@ body {
 .card:nth-child(4) {
   background-color: #d50000;
 }
+.slider {
+  width: 300px;
+}
+.card:nth-child(5) {
+  background-color: darkolivegreen;
+  width: 400px;
+
+}
 
 .card-inner {
   display: flex;
