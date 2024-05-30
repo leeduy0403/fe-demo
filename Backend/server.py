@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, request, jsonify, Response
-# from flask_mqtt import Mqtt
+from flask_mqtt import Mqtt
 from flask_cors import CORS
 from ultralytics import YOLO
 import cv2
@@ -8,43 +8,97 @@ import cv2
 app = Flask(__name__)
 CORS(app)
 
-# app.config['MQTT_BROKEN_URL'] = 'mqtt.ohstem.vn'
-# app.config['MQTT_BROKER_PORT'] = 1883
-# app.config['MQTT_USERNAME'] = 'ltbxq623'
-# app.config['MQTT_PASSWORD'] = ''
-# app.config['MQTT_KEEPALIVE'] = 5
-# app.config['MQTT_TLS_ENABLED'] = False 
+################################
+########## WEB APP #############
+################################
 
-# topic = '/flask/mqtt'
+app.config['MQTT_BROKER_URL'] = 'mqtt.ohstem.vn'
+app.config['MQTT_BROKER_PORT'] = 1883
+app.config['MQTT_USERNAME'] = 'ltbxq623'
+app.config['MQTT_PASSWORD'] = ''
+app.config['MQTT_KEEPALIVE'] = 5
+app.config['MQTT_TLS_ENABLED'] = False 
 
-# mqtt_client = Mqtt(app)
+MQTT_USERNAME = 'ltbxq623'
+TOPICS = [
+    'V1', # temperature
+    'V2', # humidity
+    'V3' # light
+    , 'V12'
+    , 'V10'
+]
+MQTT_SUB = []
+for t in TOPICS:
+   topic = MQTT_USERNAME + '/feeds/' + t
+   MQTT_SUB.append(topic)
 
-# @mqtt_client.on_connect()
-# def handle_connect(client, userdata, flags, rc):
-#    if rc == 0:
-#        print('Connected successfully')
-#        mqtt_client.subscribe(topic) # subscribe topic
-#    else:
-#        print('Bad connection. Code:', rc)
+MQTT_BULB = MQTT_USERNAME + '/feeds/V10'
+MQTT_FAN = MQTT_USERNAME + '/feeds/V12'
+
+mqtt_client = Mqtt(app)
+
+@mqtt_client.on_connect()
+def handle_connect(client, userdata, flags, rc):
+   if rc == 0:
+       print('Connected successfully')
+       for topic in MQTT_SUB:
+          mqtt_client.subscribe(topic) # subscribe topic
+   else:
+       print('Bad connection. Code:', rc)
     
-# @mqtt_client.on_message()
-# def handle_mqtt_message(client, userdata, message):
-#    data = dict(
-#        topic=message.topic,
-#        payload=message.payload.decode()
-#   )
-#    print('Received message on topic: {topic} with payload: {payload}'.format(**data))
+class Env():
+   def __init__(self, temperature=0, humidity=0, light=0):
+       self.temperature = temperature
+       self.humidity = humidity
+       self.light = light
+
+env = Env()
+@mqtt_client.on_message()
+def handle_mqtt_message(client, userdata, message):
+   data = dict(
+       topic=message.topic,
+       payload=message.payload.decode()
+  )
+   print('Received message on topic: {topic} with payload: {payload}'.format(**data))
+   if data['topic'] == MQTT_SUB[0]:
+      env.temperature = data['payload']
+   if data['topic'] == MQTT_SUB[1]:
+      env.humidity = data['payload']
+   if data['topic'] == MQTT_SUB[2]:
+      env.light = data['payload']
+   if data['topic'] == MQTT_SUB[3]:
+      print(type(data['payload']), data['payload'])
+   if data['topic'] == MQTT_SUB[4]:
+      print(type(data['payload']), data['payload'])
  
- 
-# # Route for seeing a data
-# @app.route('/publish', methods=['POST'])
-# def publish_message():
-#    request_data = request.get_json()
-#    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
-#    return jsonify({'code': publish_result[0]})
+# Route for seeing a data
+@app.route('/env')
+def get_env():
+   return {'temperature': env.temperature,
+           'humidity': env.humidity,
+           'light': env.light}
+
+@app.route('/fan')
+def set_fan():
+   speed = request.args.get('speed')
+   mqtt_client.publish(MQTT_FAN, speed)
+   return {'fan_speed' : speed}
+
+@app.route('/bulb')
+def set_bulb():
+   signal = request.args.get('signal')
+   mqtt_client.publish(MQTT_BULB, signal)
+   return {'bulb_signal' : signal}
+
+################################
+########### YOLOv8 #############
+################################
 
 model = YOLO('best.pt')
 video_capture = cv2.VideoCapture(0)
+
+def warning(flag=False):
+    return flag
 
 def generate_frames():
     # Capture video from the webcam
@@ -68,6 +122,8 @@ def generate_frames():
             label = f"{model.names[cls]}: {conf:.2f}"
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            if conf > 0.5:
+                warning(True)
 
         # Encode the frame as JPEG
         ret, buffer = cv2.imencode('.jpg', frame)
