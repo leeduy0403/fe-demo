@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import Camera from './Camera'; // Make sure the import path is correct for your project structure
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState } from 'react';
+// import Camera from './Camera'; // Make sure the import path is correct for your project structure
 
 const MainContainer = () => {
     const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -18,7 +19,8 @@ const MainContainer = () => {
             </button>
             {isCameraOpen && (
                 <div>
-                    <Camera />
+                    {/* <Camera /> */}
+                    <iframe src="/api/video_feed" height="480" width="640" title='Camera Iframe'></iframe>
                 </div>
             )}
         </main>
